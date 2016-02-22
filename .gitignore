@@ -1,0 +1,5 @@
+/.git/*
+/.svn/*
+/node_modules/*
+/scanner/node_modules/*
+/app/bower_components/*
