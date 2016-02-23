@@ -3,15 +3,15 @@
         <form>
             <div class="row">
                 <div class="form-group col-sm-3">
-                    <label >E-ticket Number</label>
+                    <label>E-ticket Number</label>
                     <input type="text" class="form-control" ng-model="info.ticketNumber" ng-change="ticketNumberChange()">
                 </div>
                 <div class="form-group col-sm-3">
-                    <label >Coupon Number</label>
+                    <label>Coupon Number</label>
                     <input type="text" class="form-control" ng-model="info.couponNumber" ng-change="couponNumberChange()">
                 </div>
                 <div class="form-group col-sm-3">
-                    <label >PNR Locator</label>
+                    <label>PNR Locator</label>
                     <input type="text" class="form-control" ng-model="info.pnr" maxlength="6">
                 </div>
             </div>
@@ -27,16 +27,17 @@
             </div>
             <div class="row">
                 <div class="form-group col-sm-3">
-                    <label >Boarding Point</label>
+                    <label>Boarding Point</label>
                     <select class="form-control" ng-model="selectedBoardingPoint">
-                      <option ng-repeat="boardingPoint in privileges.boardingPoints" value="{{boardingPoint.iatacd}}">{{boardingPoint.iatacd}} - {{boardingPoint.name}}</option>
+                        <option ng-repeat="boardingPoint in privileges.boardingPoints" value="{{boardingPoint.iatacd}}">{{boardingPoint.iatacd}} - {{boardingPoint.name}}</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3">
                     <label class="date-search">Travel Date Search Window (from / to)</label>
                     <p class="input-group">
-                      <input type="text" class="form-control" uib-datepicker-popup ng-model="fromDate" is-open="popup1.opened" close-text="Close" ng-click="open1()" ng-change="fromDateChange()"/>
-                      <span class="input-group-btn">
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="fromDate" is-open="popup1.opened" close-text="Close"
+                        ng-click="open1()" ng-change="fromDateChange()" />
+                        <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                     </p>
@@ -44,13 +45,14 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <p class="input-group date-search-to">
-                      <input type="text" class="form-control" uib-datepicker-popup ng-model="toDate" is-open="popup2.opened" min-date="fromDate" close-text="Close" ng-click="open2()"/>
-                      <span class="input-group-btn">
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="toDate" is-open="popup2.opened" min-date="fromDate"
+                        close-text="Close" ng-click="open2()" />
+                        <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                     </p>
                 </div>
-                <div class="search-buttons" >
+                <div class="search-buttons">
                     <a class="btn btn-default" ng-click="clear()">Clear</a>
                     <button class="btn btn-success" ng-click="search()" ng-disabled="searching">Search</button>
                 </div>
@@ -103,10 +105,14 @@
         <div class="row">
             <div class="from-to">
                 <div>From > To</div>
-                <div>{{selectedCoupon.origin}} - {{selectedCoupon.originName}} <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"> </span> {{selectedCoupon.destination}} - {{selectedCoupon.destinationName}}</div>
+                <div>{{selectedCoupon.origin}} - {{selectedCoupon.originName}} 
+                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"> </span>
+                    {{selectedCoupon.destination}} - {{selectedCoupon.destinationName}}
+                </div>
             </div>
             <div class="passenger-btns">
-                <a class="btn" ng-bind="action(selectedCoupon)" ng-show="action(selectedCoupon)" ng-class="actionClass(selectedCoupon)"  ng-click="changeStatus(selectedCoupon)" ng-disabled="selectedCoupon.statusMessage=='Status Change in Progress'"></a>
+                <a class="btn" ng-bind="action(selectedCoupon)" ng-show="action(selectedCoupon)" ng-class="actionClass(selectedCoupon)" ng-click="changeStatus(selectedCoupon)"
+                ng-disabled="selectedCoupon.statusMessage=='Status Change in Progress'"></a>
             </div>
         </div>
     </div>
@@ -154,17 +160,23 @@
                     <span ng-class="orderClass()" ng-show="predicate === 'statusMessage'" aria-hidden="true"></span>
                 </th>
             </tr>
-            <tr ng-repeat="coupon in filteredCoupons  = (coupons | filter:info) | orderBy:predicate:reverse | limitTo : 10 : (currentPage - 1) * 10" ng-click="select(coupon)" ng-class="rowStyle(coupon)">
-                <td>{{coupon.ticketNumber}}/{{coupon.couponNumber}}<br/>{{coupon.pnr}}</td>
-                <td>{{coupon.firstName}}<br/>{{coupon.lastName}}</td>
+            <tr ng-repeat="coupon in filteredCoupons  = (coupons | filter:info) | orderBy:predicate:reverse | limitTo : 10 : (currentPage - 1) * 10"
+            ng-click="select(coupon)" ng-class="rowStyle(coupon)">
+                <td>{{coupon.ticketNumber}}/{{coupon.couponNumber}}
+                    <br/>{{coupon.pnr}}</td>
+                <td>{{coupon.firstName}}
+                    <br/>{{coupon.lastName}}</td>
                 <td>{{coupon.paxType}}</td>
                 <td>{{coupon.origin}} > {{coupon.destination}}</td>
                 <td>{{coupon.class}}</td>
                 <td>{{toLocalDate(coupon.departure) | date :'yyyy/MM/dd HH:mm'}}</td>
                 <td>{{formatStatus(coupon.couponStatus)}}</td>
-                <td><a class="btn" ng-show="action(coupon)" ng-class="actionClass(coupon)" ng-click="changeStatus(coupon)" ng-disabled="coupon.statusMessage=='Status Change in Progress'"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> {{action(coupon)}}</a></td>
+                <td>
+                    <a class="btn" ng-show="action(coupon)" ng-class="actionClass(coupon)" ng-click="changeStatus(coupon)" ng-disabled="coupon.statusMessage=='Status Change in Progress'"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> {{action(coupon)}}</a>
+                </td>
             </tr>
         </table>
-        <uib-pagination total-items="filteredCoupons.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" force-ellipses="true"></uib-pagination>
+        <uib-pagination total-items="filteredCoupons.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true"
+        force-ellipses="true"></uib-pagination>
     </div>
 </div>

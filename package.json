@@ -1,16 +1,16 @@
 {
-  "name": "boarding",
-  "private": true,
-  "version": "0.0.0",
-  "description": "Boarding",
-  "repository": "https://github.com/angular/angular-seed",
-  "license": "MIT",
-  "scripts": {
-    "postinstall": "bower install",
-    "start": "http-server -a 0.0.0.0 -p 8000"
-  },
-  "dependencies": {
-    "bower": "^1.7.7",
-    "http-server": "^0.8.5"
-  }
+    "name": "boarding",
+    "private": true,
+    "version": "0.0.0",
+    "description": "Boarding",
+    "repository": "",
+    "license": "MIT",
+    "scripts": {
+        "postinstall": "bower install",
+        "start": "http-server -a 0.0.0.0 -p 8000"
+    },
+    "dependencies": {
+        "bower": "^1.7.7",
+        "http-server": "^0.8.5"
+    }
 }

@@ -6,47 +6,47 @@ var app = angular.module('boarding', [
     'ngWebsocket',
     'services'
 ]);
-app.run(['$rootScope', '$websocket', function($rootScope, $websocket){
-	var ws = $websocket.$new('ws://localhost:12345');
-	ws.$on('$message', function (data) {
-		$rootScope.listener(data);
-	});
+app.run(['$rootScope', '$websocket', function ($rootScope, $websocket) {
+    var ws = $websocket.$new('ws://localhost:12345');
+    ws.$on('$message', function (data) {
+        $rootScope.listener(data);
+    });
 }]);
 app.config(['$routeProvider',
-    function($routeProvider) {
+    function ($routeProvider) {
         $routeProvider.
-        when('/', {
-            templateUrl: 'login.html',
-            controller: 'loginCtrl'
-        }).
-        when('/home', {
-            templateUrl: 'home.html',
-            controller: 'homeCtrl'
-        }).
-        otherwise({
-            redirectTo: '/'
-        });
+            when('/', {
+                templateUrl: 'login.html',
+                controller: 'loginCtrl'
+            }).
+            when('/home', {
+                templateUrl: 'home.html',
+                controller: 'homeCtrl'
+            }).
+            otherwise({
+                redirectTo: '/'
+            });
     }
 ]);
-app.controller('appCtrl', ['$scope', '$location', '$window', 'gettextCatalog', function($scope, $location, $window, gettextCatalog) {
-    if($window.sessionStorage["cslang"]) {
+app.controller('appCtrl', ['$scope', '$location', '$window', 'gettextCatalog', function ($scope, $location, $window, gettextCatalog) {
+    if ($window.sessionStorage["cslang"]) {
         $scope.currentLanguage = JSON.parse($window.sessionStorage["cslang"]);
     } else {
         $scope.currentLanguage = 'English';
     }
     $scope.languages = ['English', '日本語'];
-    $scope.userName = function() {
-        if(!$scope.privileges) {
+    $scope.userName = function () {
+        if (!$scope.privileges) {
             return 'Not signed in';
         } else {
             return $scope.privileges.name;
         }
     }
-    $scope.logout = function() {
+    $scope.logout = function () {
         $location.path("login");
         $scope.privileges = null;
     }
-    $scope.changeLanguage = function(language) {
+    $scope.changeLanguage = function (language) {
         $scope.currentLanguage = language;
         if (language === 'English') {
             gettextCatalog.setCurrentLanguage('en');
